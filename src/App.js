@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useNavigate } from "react-router-dom";
+import Category from "./components/Category";
+import Search from "./components/Search";
+import { RecipeContextProvider } from "./contexts/RecipeContext";
+import Pages from "./pages/Pages";
 
 function App() {
+  let navigate = useNavigate("");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1 onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
+        Food Recipes App
+      </h1>
+
+      <RecipeContextProvider>
+        <Search />
+        <Category />
+        <Pages />
+      </RecipeContextProvider>
     </div>
   );
 }
