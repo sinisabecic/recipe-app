@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import styled from "styled-components";
-import { motion, AnimatePresence } from "framer-motion";
 
 const Searched = () => {
   let { search } = useParams();
@@ -11,7 +10,7 @@ const Searched = () => {
 
   useEffect(() => {
     if (search) {
-      const timeoutId = setTimeout(() => !!search && getReceipt(searched), 500);
+      const timeoutId = setTimeout(() => !!search && getReceipt(search), 500);
       return () => {
         clearTimeout(timeoutId);
       };
@@ -25,7 +24,7 @@ const Searched = () => {
       )
       .then((res) => {
         setSearched(res.data.results);
-        console.log(res.data);
+        console.log(res.data.results);
       })
       .catch((err) => console.log(err));
   };
