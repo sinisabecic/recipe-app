@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@400;500&display=swap");
 
 * {
   margin: 0;
@@ -8,12 +8,13 @@
 }
 
 body {
-  margin: 0% 15%;
+  margin: 0% 12%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #efefee;
 }
 
 code {
@@ -25,6 +26,13 @@ h3 {
   font-size: 1.5rem;
   color: rgb(56, 56, 56);
   line-height: 2.5rem;
+  margin: 2rem 0rem;
+}
+
+h2 {
+  font-size: 1rem;
+  color: rgb(56, 56, 56);
+  line-height: 2rem;
   margin: 2rem 0rem;
 }
 

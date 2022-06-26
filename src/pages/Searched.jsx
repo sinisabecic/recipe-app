@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -21,7 +21,7 @@ const Searched = () => {
   const getReceipt = async (name) => {
     await axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?&apiKey=${process.env.REACT_APP_API_KEY}&query=${name}`
+        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${name}`
       )
       .then((res) => {
         setSearched(res.data.results);
@@ -37,9 +37,11 @@ const Searched = () => {
           {searched &&
             searched.map((recipe) => {
               return (
-                <Card>
-                  <img src={recipe.image} alt={recipe.title} />
-                  <h4>{recipe.title}</h4>
+                <Card key={recipe.id}>
+                  <Link to={`/recipe/${recipe.id}`}>
+                    <img src={recipe.image} alt={recipe.title} />
+                    <h4>{recipe.title}</h4>
+                  </Link>
                 </Card>
               );
             })}
@@ -53,6 +55,9 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   grid-gap: 3rem;
+  a {
+    text-decoration: none;
+  }
 `;
 
 const Wrapper = styled.div`

@@ -20,6 +20,7 @@ const Search = () => {
           onChange={(e) => setInput(e.target.value)}
           type="text"
           value={input}
+          placeholder="Press enter for search..."
         />
       </div>
     </FormStyle>
@@ -27,11 +28,22 @@ const Search = () => {
 };
 
 const FormStyle = styled.form`
-  margin: 1.5rem 0rem;
+  margin: 0rem 0rem;
 
   div {
     width: 100%;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 25%;
+      transform: translate(100%, -50%);
+      color: white;
+    }
   }
 
   width: 100%;
@@ -43,14 +55,7 @@ const FormStyle = styled.form`
     padding: 1rem 3rem;
     border-radius: 1rem;
     outline: none;
-    width: 100%;
-  }
-  svg {
-    position: absolute;
-    top: 50%;
-    left: 0%;
-    transform: translate(100%, -50%);
-    color: white;
+    width: 50%;
   }
 `;
 

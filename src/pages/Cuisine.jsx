@@ -36,14 +36,21 @@ const Cuisine = () => {
       <Wrapper>
         <h3>{type} Cuisine</h3>
 
-        <Grid>
+        <Grid
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           {cuisine &&
             cuisine.map((recipe) => {
               return (
-                <Card key={recipe.id}>
-                  <img src={recipe.image} alt={recipe.title} />
-                  <h4>{recipe.title}</h4>
-                </Card>
+                <Link to={`/recipe/${recipe.id}`}>
+                  <Card key={recipe.id}>
+                    <img src={recipe.image} alt={recipe.title} />
+                    <h4>{recipe.title}</h4>
+                  </Card>
+                </Link>
               );
             })}
         </Grid>
@@ -52,7 +59,7 @@ const Cuisine = () => {
   );
 };
 
-const Grid = styled.div`
+const Grid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   grid-gap: 3rem;

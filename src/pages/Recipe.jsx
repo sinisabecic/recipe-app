@@ -7,9 +7,15 @@ const Recipe = () => {
   let { name } = useParams();
 
   const [recipe, setRecipe] = useState({});
+  const [extendedIngredients, setExtendedIngredients] = useState([]);
+  const [activeTab, setActiveTab] = useState("instructions");
 
-  //   const regex = /(<([^>]+)>)/gi;
-  //   const result = recipe.summary.replace(regex, "");
+  //! React ima svoj regex za html
+  // const getSummary = (data) => {
+  //   if (!data) return;
+  //   data = data.replace(/(<([^>]+)>)/gi, "");
+  //   return data;
+  // };
 
   useEffect(() => {
     getRecipe(name);
@@ -22,49 +28,89 @@ const Recipe = () => {
       )
       .then((res) => {
         setRecipe(res.data);
+        setExtendedIngredients(res.data.extendedIngredients);
         console.log(res.data);
+        console.log(res.data.extendedIngredients);
       })
       .catch((err) => console.log(err));
   };
 
   return (
     <div>
-      <Wrapper>
-        <h3>{recipe.title}</h3>
+      <DetailWrapper>
+        <div>
+          <h3>{recipe.title}</h3>
+          <img src={recipe.image} alt={recipe.title} />
+        </div>
+        <Info>
+          <Button
+            className={activeTab === "instructions" ? "active" : ""}
+            onClick={() => setActiveTab("instructions")}
+          >
+            Instructions
+          </Button>
+          <Button
+            className={activeTab === "ingredients" ? "active" : ""}
+            onClick={() => setActiveTab("ingredients")}
+          >
+            Ingredients
+          </Button>
+          {activeTab === "instructions" && (
+            <div>
+              <h2 dangerouslySetInnerHTML={{ __html: recipe.summary }}></h2>
+              <h2
+                dangerouslySetInnerHTML={{ __html: recipe.instructions }}
+              ></h2>
+            </div>
+          )}
 
-        <Grid>
-          <Card key={recipe.id}>
-            <img src={recipe.image} alt={recipe.title} />
-            <p>{recipe.summary}</p>
-          </Card>
-        </Grid>
-      </Wrapper>
+          {activeTab === "ingredients" && (
+            <ul>
+              {extendedIngredients.map((ingredient) => {
+                return (
+                  <li key={ingredient.id}>
+                    <span>{ingredient.name}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </Info>
+      </DetailWrapper>
     </div>
   );
 };
 
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  grid-gap: 3rem;
+const DetailWrapper = styled.div`
+  margin-top: 10rem;
+  margin-bottom: 5rem;
+  display: flex;
+  .active {
+    background: linear-gradient(35deg, #494949, #313131);
+    color: white;
+  }
+  h2 {
+    margin-bottom: 2rem;
+  }
+  li {
+    font-size: 1.2rem;
+    line-height: 2.5rem;
+  }
+  ul {
+    margin-top: 2rem;
+  }
 `;
 
-const Wrapper = styled.div`
-  margin: 4rem 0rem;
+const Button = styled.button`
+  padding: 1rem 2rem;
+  color: #313131;
+  background: white;
+  border: 2px solid black;
+  margin-right 2rem;
 `;
 
-const Card = styled.div`
-  img {
-    border-radius: 2rem;
-    width: 100%;
-  }
-  a {
-    text-decoration: none;
-  }
-  h4 {
-    text-align: center;
-    padding: 1rem;
-  }
+const Info = styled.div`
+  margin-left: 10rem;
 `;
 
 export default Recipe;
