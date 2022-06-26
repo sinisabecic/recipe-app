@@ -1,5 +1,6 @@
 # Demo
 Link: https://beamish-starship-b1735d.netlify.app
+(Note: Refresh again after first loading page)
 
 # Getting Started with Create React App
 
