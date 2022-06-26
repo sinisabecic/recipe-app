@@ -1,5 +1,5 @@
 # Demo
-Link (https://beamish-starship-b1735d.netlify.app/)
+Link: https://beamish-starship-b1735d.netlify.app
 
 # Getting Started with Create React App
 
